@@ -1,4 +1,8 @@
 "TODO: Read and experiment with coc settings in this file
+"cspell:disable
+set encoding=utf-8
+set fileencoding=utf-8
+set termencoding=utf-8
 set go=d
 set relativenumber
 set number
@@ -28,7 +32,7 @@ set timeoutlen=500
 set showcmd
 set breakindent
 set breakindentopt=shift:4,min:40,sbr
-set showbreak=>>
+set showbreak=>
 syntax on
 noremap <Up> :prev<cr>
 noremap <Down> :n<cr>
@@ -63,8 +67,12 @@ Plug 'evanleck/vim-svelte'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-obsession'
+Plug 'puremourning/vimspector'
 call plug#end()
 colo monokai
+
+" air-line
+let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -72,9 +80,9 @@ endif
 
 " unicode symbols
 " let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
+let g:airline_left_sep = '▶'
 " let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
+let g:airline_right_sep = '◀'
 let g:airline_symbols.colnr = ' ㏇:'
 " let g:airline_symbols.colnr = ' ℅:'
 let g:airline_symbols.crypt = '🔒'
@@ -112,9 +120,9 @@ let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 
-" Mappings
-map [q O<ESC>
+" Personal Mappings
 map ]q o<ESC>
+map [q O<ESC>
 map [a :w<CR>
 nnoremap ' `
 map <C-J> :bn<CR>
@@ -122,10 +130,25 @@ map <C-K> :bp<CR>
 map [f :cn<CR>
 map ]f :cp<CR>
 nmap <leader>x :w<cr>:so $MYVIMRC<cr>:e<cr>
+nmap <leader>X :w<cr>:so $MYGVIMRC<cr>:e<cr>
 nmap <F9> :Buffer<cr>
-nnoremap <leader>cd :cd<cr>:call fzf#run({'source': 'find . -type d -print', 'sink': 'cd'})<cr>
+nnoremap <leader>cd :call fzf#run({'source': 'find ~ -type d -print', 'sink': 'cd'})<cr>
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>ed :call fzf#run({'source': 'find . -type d -print', 'sink': 'e'})<cr>
+nmap <leader>H :cd ~/Documents/dev_work/thrift<cr>
+" search for visually selected text with //
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+nnoremap [x :bd
+nnoremap [X :qa
+nnoremap <leader>q :make<cr>
+nnoremap <C-p> <C-b>
+nnoremap <C-n> <C-f>
+nnoremap [e /\cerror<cr>
+nnoremap [p :ter++shell ++close gitpush<cr>
+nnoremap )P :ter++shell ++close gitcommit<cr>
+nnoremap <leader>cw :cd %:h<cr>
+
+"nnoremap <leader>f :call fzf#run({'source': 'find -L -print', 'sink': 'e'})<cr>
 
 " Find a better way to comment...
 map <F3> {i/*<Esc>O<Esc>))o*/<Esc>
@@ -142,11 +165,12 @@ nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 "
 tmap <C-e> N
 
-" coc settings & remappings
 set nobackup
 set nowritebackup
 set updatetime=300
 set signcolumn=yes
+
+""""""""""""""""""""""""""""""""""""""""""""""" coc settings & remappings""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -276,7 +300,7 @@ nmap ]g <Plug>(coc-diagnostic-next)
 au BufEnter,BufNew *.ts,*.js,*.tsx,*.jsx call SetTSOptions()
 fu SetTSOptions ()
 	set mp='npx\ tsc\ -p\ $*'
-	nmap [t :$tab ter yarn test<cr>
+	nmap [t :$tab ter++shell cd ~/Documents/dev_work/thrift && yarn test<cr>
 	nmap ]t :$tabc<cr>
 	nmap [r :tab ter yarn run dev<cr>
 endfu
@@ -284,38 +308,52 @@ au BufEnter,BufNew *.py call SetPYOptions()
 fu SetPYOptions ()
 	set mp='python3\ %'
 endfu
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " a plugin is messing with this key
 nmap \ \
 
 map <C-h> <C-t>
-set wildignore+=*/tmp/*                                     " ctrlp - ignore files in tmp directories
-set wildignore+=*/target/*                                  " ctrlp - ignore files in target directories
-set wildignore+=*/build/*                                   " ctrlp - ignore gradle build directories
-set wildignore+=*/built/*                                   " ctrlp - ignore gradle build directories
-set wildignore+=*.so                                        " ctrlp - ignore .so files
-set wildignore+=*.o                                         " ctrlp - ignore .o files
-set wildignore+=*.class                                     " ctrlp - ignore .class files
-set wildignore+=*.swp                                       " ctrlp - ignore .swp files
-set wildignore+=*.zip                                       " ctrlp - ignore .zip files
-set wildignore+=*.pdf                                       " ctrlp - ignore .pdf files
-set wildignore+=*/node_modules/*                            " ctrlp - ignore node modules
-set wildignore+=*/bower_components/*                        " ctrlp - ignore bower components
-set wildignore+=*/dist/*                                    " ctrlp - ignore grunt build director
-" search for visually selected text with //
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+set wildignore+=*/tmp/*                                     " ctrl p - ignore files in tmp directories
+set wildignore+=*/target/*                                  " ctrl p - ignore files in target directories
+set wildignore+=*/build/*                                   " ctrl p - ignore gradle build directories
+set wildignore+=*/built/*                                   " ctrl p - ignore gradle build directories
+set wildignore+=*.so                                        " ctrl p - ignore .so files
+set wildignore+=*.o                                         " ctrl p - ignore .o files
+set wildignore+=*.class                                     " ctrl p - ignore .class files
+set wildignore+=*.swp                                       " ctrl p - ignore .swp files
+set wildignore+=*.zip                                       " ctrl p - ignore .zip files
+set wildignore+=*.pdf                                       " ctrl p - ignore .pdf files
+set wildignore+=*/node_modules/*                            " ctrl p - ignore node modules
+set wildignore+=*/bower_components/*                        " ctrl p - ignore bower components
+set wildignore+=*/dist/*                                    " ctrl p - ignore grunt build director
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-let ROOT='~/Documents/dev_work/thrift'
-fu TA()
-	nnoremap <leader>cd :exec 'cd' ROOT<cr>:call fzf#run({'source': 'find . -type d -print', 'sink': 'cd'})<cr>
-endfu 
-nnoremap <C-f><C-f> :NERDTreeToggle<cr>:set relativenumber<cr>
-nnoremap <C-f> :NERDTreeFocus<cr>:set relativenumber<cr>
-nnoremap <C-f><C-w> :NERDTreeCWD<cr>:set relativenumber<cr>
-nnoremap <C-f><C-d> :NERDTreeFind<cr>:set relativenumber<cr>
-nnoremap [x :bd
-nnoremap <leader>q :make<cr>
-nnoremap <C-p> <C-b>
-nnoremap <C-n> <C-f>
-nnoremap [e /\cerror<cr>
-nnoremap [p :tab ter++close sh gitpush.sh<cr>
+nnoremap <C-f><C-f> :NERDTreeToggle<cr>
+nnoremap <C-f> :NERDTreeFocus<cr>
+nnoremap <C-f><C-w> :NERDTreeCWD<cr>
+nnoremap <C-f><C-d> :NERDTreeFind<cr>
+let g:NERDTreeMapHelp = '<F2>'
+let g:NERDTreeMapQuit = '<F12>'
+"
+"
+""""""""""""""""""""" Vimspector Shortcuts """"""""""""""""""""
+"
+nnoremap <Leader>dd :call vimspector#Launch()<CR>
+nnoremap <Leader>de :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+
+nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+
+nmap <Leader>dk <Plug>VimspectorRestart
+nmap <Leader>dh <Plug>VimspectorStepOut
+nmap <Leader>dl <Plug>VimspectorStepInto
+nmap <Leader>dj <Plug>VimspectorStepOver
+"u
+let g:vimspector_base_dir='/home/darealestniqqa/.vim/plugged/vimspector'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"fix colo scheme for coc nvim selection box"
+if  g:colors_name == 'onedark' 
+	highlight CocMenuSel ctermbg=4  
+endif

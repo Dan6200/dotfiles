@@ -40,16 +40,19 @@ export LC_ALL=en_NG.UTF-8
 export LANG=en_NG.UTF-8
 export LANGUAGE=en_NG.UTF-8
 export PATH="$HOME/.local/bin:$PATH"
-xmodmap -e "keycode 94 = Shift_L"
-export FZF_DEFAULT_COMMAND='find . -name .git -prune -o -name node_modules -prune -o -name built -prune -o -name coverage -prune -o -name tmp -prune -o -type f -print'
-alias m=mkdir
+export FZF_DEFAULT_COMMAND='find -L'
 alias rmd=rmdir
 alias e='vim $(fzf)'
+alias E='cd&&vim $(fzf)'
 alias R='vim -R $(fzf)'
-alias C='cd $(find . -type d -print | fzf)'
-alias P='pushd $(find . -type d -print | fzf)'
-alias PP=popd
+alias c='cd $(find . -type d -print | fzf)'
+alias C='cd&&cd $(find . -type d -print | fzf)'
+alias p='pushd $(find . -type d -print | fzf)'
+alias P='pushd&&pushd $(find . -type d -print | fzf)'
+alias pd=pushd
+alias pp=popd
 alias ls='ls -F --color'
+alias Ls='ls -al|less'
 # Search backwards and forwards with a pattern
 bindkey -M vicmd ']' history-incremental-pattern-search-backward
 bindkey -M vicmd '[' history-incremental-pattern-search-forward
@@ -59,3 +62,4 @@ bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^F' history-incremental-pattern-search-forward
 stty -ixon
 alias thrift='cd && cd ~/Documents/dev_work/thrift'
+path+=('/home/darealestniqqa/scripts/bin')
