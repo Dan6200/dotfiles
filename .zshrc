@@ -41,6 +41,7 @@ export LANG=en_NG.UTF-8
 export LANGUAGE=en_NG.UTF-8
 export PATH="$HOME/.local/bin:$PATH"
 export FZF_DEFAULT_COMMAND='find -L'
+alias md=mkdir
 alias rmd=rmdir
 alias e='vim $(fzf)'
 alias E='cd&&vim $(fzf)'

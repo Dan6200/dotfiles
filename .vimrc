@@ -1,5 +1,7 @@
 "TODO: Read and experiment with coc settings in this file
 "cspell:disable
+set dict+=/home/darealestniqqa/dict/words
+set cmdheight=2
 set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
@@ -69,7 +71,8 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-obsession'
 Plug 'puremourning/vimspector'
 call plug#end()
-colo monokai
+" colo monokai
+colo onedark
 
 " air-line
 let g:airline_powerline_fonts = 1
@@ -121,9 +124,10 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 
 " Personal Mappings
-map ]q o<ESC>
-map [q O<ESC>
+map [q o<ESC>
+map ]q O<ESC>
 map [a :w<CR>
+nnoremap - @
 nnoremap ' `
 map <C-J> :bn<CR>
 map <C-K> :bp<CR>
@@ -132,9 +136,13 @@ map ]f :cp<CR>
 nmap <leader>x :w<cr>:so $MYVIMRC<cr>:e<cr>
 nmap <leader>X :w<cr>:so $MYGVIMRC<cr>:e<cr>
 nmap <F9> :Buffer<cr>
-nnoremap <leader>cd :call fzf#run({'source': 'find ~ -type d -print', 'sink': 'cd'})<cr>
+nnoremap <leader>cd :call fzf#run({'source': 'find . -type d -print', 'sink': 'cd'})<cr>
+nnoremap <leader>Cd :call fzf#run({'source': 'find ~ -type d -print', 'sink': 'cd'})<cr>
 nnoremap <leader>f :Files<cr>
+nnoremap <leader>g :GFiles<cr>
 nnoremap <leader>ed :call fzf#run({'source': 'find . -type d -print', 'sink': 'e'})<cr>
+nnoremap <leader>cw :cd %:h<cr>
+nnoremap <leader>r :Rg 
 nmap <leader>H :cd ~/Documents/dev_work/thrift<cr>
 " search for visually selected text with //
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -146,16 +154,16 @@ nnoremap <C-n> <C-f>
 nnoremap [e /\cerror<cr>
 nnoremap [p :ter++shell ++close gitpush<cr>
 nnoremap )P :ter++shell ++close gitcommit<cr>
-nnoremap <leader>cw :cd %:h<cr>
 
 "nnoremap <leader>f :call fzf#run({'source': 'find -L -print', 'sink': 'e'})<cr>
 
 " Find a better way to comment...
 map <F3> {i/*<Esc>O<Esc>))o*/<Esc>
 map <F4> (dd/\*\/<CR>dd
-map <F5> i`<Esc>ea`<Esc>
-map <F6> i"<Esc>ea"<Esc>
-map <F7> i'<Esc>ea'<Esc>
+"""""""""""""
+map <F5> i`<Esc>Ea`<Esc>
+map <F6> i"<Esc>Ea"<Esc>
+map <F7> i'<Esc>Ea'<Esc>
 nmap :: q:
 " j, k          Store relative line number jumps in the jumplist.
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
