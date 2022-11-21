@@ -210,7 +210,6 @@ bar {
 # Review the lines below and append to ~/.config/i3/config
 
 # start firefox shortcut
-exec firefox-esr
 bindsym $mod+Shift+Return exec firefox-esr
 
 #Hide window title bar

@@ -51,6 +51,8 @@ let mapleader= "\\"
 packadd! matchit
 set showmatch
 call plug#begin('~/.vim/plugged')
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 Plug 'digitaltoad/vim-pug'
@@ -65,16 +67,19 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 Plug 'sickill/vim-monokai'
+Plug 'rakr/vim-one'
 Plug 'evanleck/vim-svelte'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-fugitive'
 Plug 'puremourning/vimspector'
 call plug#end()
 " colo monokai
 colo onedark
 
 " air-line
+let g:airline_theme = 'onedark'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -129,6 +134,7 @@ map ]q O<ESC>
 map [a :w<CR>
 nnoremap - @
 nnoremap ' `
+nnoremap <Space>C :Commits<cr>
 map <C-J> :bn<CR>
 map <C-K> :bp<CR>
 map [f :cn<CR>
@@ -142,7 +148,8 @@ nnoremap <leader>f :Files<cr>
 nnoremap <leader>g :GFiles<cr>
 nnoremap <leader>ed :call fzf#run({'source': 'find . -type d -print', 'sink': 'e'})<cr>
 nnoremap <leader>cw :cd %:h<cr>
-nnoremap <leader>r :Rg 
+nnoremap <leader>r :Rg<cr>
+nnoremap <leader>rg :Rg <C-R><C-W><CR>
 nmap <leader>H :cd ~/Documents/dev_work/thrift<cr>
 " search for visually selected text with //
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -154,7 +161,10 @@ nnoremap <C-n> <C-f>
 nnoremap [e /\cerror<cr>
 nnoremap [p :ter++shell ++close gitpush<cr>
 nnoremap )P :ter++shell ++close gitcommit<cr>
-
+"Command for quicker vimgrep searches
+command! -nargs=1 Vimgrep vimgrep /<args>/ **/*
+" convenient mapping
+nnoremap <space>V :Vimgrep 
 "nnoremap <leader>f :call fzf#run({'source': 'find -L -print', 'sink': 'e'})<cr>
 
 " Find a better way to comment...
@@ -365,3 +375,5 @@ let g:vimspector_base_dir='/home/darealestniqqa/.vim/plugged/vimspector'
 if  g:colors_name == 'onedark' 
 	highlight CocMenuSel ctermbg=4  
 endif
+" vim markdown 
+let g:vim_markdown_new_list_item_indent = 0
