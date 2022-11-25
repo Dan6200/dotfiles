@@ -211,6 +211,7 @@ bar {
 
 # start firefox shortcut
 bindsym $mod+Shift+Return exec firefox-esr
+exec firefox-esr
 
 #Hide window title bar
 default_border pixel 1
@@ -222,4 +223,5 @@ exec --no-startup-id xrandr -s 7
 exec --no-startup-id "setxkbmap -option caps:swapescape -option altwin:swap_alt_win"
 exec_always xmodmap ~/.Xmodmap
 assign [class="Terminal"] 1
+assign [class="Firefox"] 2
 exec redshift -l 9.3:12.5

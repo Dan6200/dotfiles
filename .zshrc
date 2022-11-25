@@ -5,6 +5,7 @@ promptinit
 prompt adam1
 
 setopt histignorealldups sharehistory
+setopt autocd
 
 # Use emacs keybindings even if our EDITOR is set to vi
 # bindkey -e
@@ -64,3 +65,7 @@ bindkey -M viins '^F' history-incremental-pattern-search-forward
 stty -ixon
 alias thrift='cd && cd ~/Documents/dev_work/thrift'
 path+=('/home/darealestniqqa/scripts/bin')
+
+bindkey -s '[r' 'rofi -show drun\n'
+bindkey -s ']t' 'tmux\n'
+bindkey -s '[t' 'tmux a\n'

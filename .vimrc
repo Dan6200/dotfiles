@@ -132,7 +132,7 @@ let g:airline#extensions#tabline#right_alt_sep = ''
 map [q o<ESC>
 map ]q O<ESC>
 map [a :w<CR>
-nnoremap - @
+nnoremap - @:
 nnoremap ' `
 nnoremap <Space>C :Commits<cr>
 map <C-J> :bn<CR>
@@ -143,7 +143,7 @@ nmap <leader>x :w<cr>:so $MYVIMRC<cr>:e<cr>
 nmap <leader>X :w<cr>:so $MYGVIMRC<cr>:e<cr>
 nmap <F9> :Buffer<cr>
 nnoremap <leader>cd :call fzf#run({'source': 'find . -type d -print', 'sink': 'cd'})<cr>
-nnoremap <leader>Cd :call fzf#run({'source': 'find ~ -type d -print', 'sink': 'cd'})<cr>
+nnoremap <leader>CD :call fzf#run({'source': 'find ~ -type d -print', 'sink': 'cd'})<cr>
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>g :GFiles<cr>
 nnoremap <leader>ed :call fzf#run({'source': 'find . -type d -print', 'sink': 'e'})<cr>
