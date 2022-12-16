@@ -66,6 +66,5 @@ stty -ixon
 alias thrift='cd && cd ~/Documents/dev_work/thrift'
 path+=('/home/darealestniqqa/scripts/bin')
 
-bindkey -s '[r' 'rofi -show drun\n'
 bindkey -s ']t' 'tmux\n'
 bindkey -s '[t' 'tmux a\n'
